@@ -22,12 +22,12 @@ async function addTask() {
 
     const data = await response.json();
     const taskList = document.getElementById('taskList');
-    const li = createTaskElement(data.id, taskText, false);
+    const li = createTaskElement(data.id, taskText, false, taskList);
     taskList.appendChild(li);
     taskInput.value = '';
 }
 
-function createTaskElement(id, taskText, done) {
+function createTaskElement(id, taskText, done, taskList) {
     const li = document.createElement('li');
     li.textContent = taskText;
     li.dataset.id = id;
@@ -56,7 +56,7 @@ function createTaskElement(id, taskText, done) {
         await fetch(`/api/tasks/${id}`, {
             method: 'DELETE'
         });
-        taskList.removeChild(li);
+        taskList.removeChild(li); // Fixing here
     };
 
     li.appendChild(doneBtn);
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const tasks = await fetchTasks();
     const taskList = document.getElementById('taskList');
     tasks.forEach(task => {
-        const li = createTaskElement(task.id, task.task, task.done);
+        const li = createTaskElement(task.id, task.task, task.done, taskList);
         taskList.appendChild(li);
     });
 });

@@ -25,7 +25,7 @@ app.get('/api/tasks', (req, res) => {
 // Add a new task
 app.post('/api/tasks', (req, res) => {
     const { task } = req.body;
-    db.run("INSERT INTO tasks (task, done) VALUES (?, ?)", [task, 0], function(err) {
+    db.run("INSERT INTO tasks (task, done) VALUES (?, ?)", [task, 0], function(err) { // Fixing here
         if (err) {
             res.status(400).json({ error: err.message });
             return;
