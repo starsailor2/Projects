@@ -1,2 +1,3 @@
-# Python-Projects
-Cool project made by using python
+# Projects
+Cool project, just enjoy
+
